@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify
 import hashlib
 import datetime as date
 
-
 app = Flask(__name__)
 
 class Block:
@@ -17,7 +16,6 @@ class Block:
         hash_string = str(self.index) + str(self.timestamp) + str(self.data) + str(self.previous_hash)
         return hashlib.sha256(hash_string.encode()).hexdigest()
         
-
 class Blockchain:
     def __init__(self):
         self.chain = [self.create_genesis_block()]
@@ -33,37 +31,25 @@ class Blockchain:
         new_block.hash = new_block.calculate_hash()
         self.chain.append(new_block)
 
-    def is_valid(self):
-        for i in range(1, len(self.chain)):
-            current_block = self.chain[i]
-            previous_block = self.chain[i-1]
-
-            if current_block.hash != current_block.calculate_hash():
-                return False
-            
-            if current_block.previous_hash != previous_block.hash:
-                return False
-            
-        return True
-    
+    def to_dict(self):
+        return [
+            {
+                'index': block.index,
+                'timestamp': str(block.timestamp),
+                'data': block.data,
+                'hash': block.hash,
+                'previous_hash': block.previous_hash
+            }
+            for block in self.chain
+        ]
 
 blockchain = Blockchain()
 blockchain.add_block(Block(1, date.datetime.now(), "Transaction Data 1", ""))
 blockchain.add_block(Block(2, date.datetime.now(), "Transaction Data 2", ""))
 
-
+@app.route("/blockchain")
 def get_blockchain():
-    chain_data = []
-    for block in blockchain.chain:
-        chain_data.append({
-            'index': block.index,
-            'timestamp': str(block.timestamp),
-            'data': block.data,
-            'hash': block.hash,
-            'previous_hash': block.previous_hash
-        })
-    return jsonify(chain_data)
-
+    return jsonify(blockchain.to_dict())
 
 @app.route('/')
 def index():

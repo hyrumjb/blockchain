@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-wdith, initial-scale=1.0" />
+    <title>Free Coding Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script>
+      async function loadBlockchain() {
+        const response = await fetch("/blockchain");
+        const blockchain = await response.json();
+        const blockchainDiv = document.querySelector(".blockchain");
+
+        blockchainDiv.innerHTML = "";
+
+        blockchain.forEach(block => {
+          const blockDiv = document.createElement("div");
+          blockDiv.classList.add("block");
+          blockDiv.innerHTML = `
+            <p><strong>Block #${block.index}</strong></p>
+            <p><strong>Timestamp:</strong> ${block.timestamp}</p>
+            <p><strong>Data:</strong> ${block.data}</p>
+            <p><strong>Hash</strong> ${block.hash}</p>
+            <p><strong>Previous Hash:</strong> ${block.previous_hash}</p>
+            `;
+            blockchainDiv.appendChild(blockDiv);
+        });
+      }
+
+      window.onload = loadBlockchain
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Free Coding Project</h1>
+      <nav>
+        <menu>
+          <a href="index.html">Home</a>
+          <a href="README.md">About</a>
+        </menu>
+      </nav>
+    </header>
+
+    <main>
+      <h3>Check out the Blockchain:</h3>
+      <div class="blockchain">
+        <!-- Blockchain blocks -->
+      </div>
+    </main>
+
+    <footer>
+      <div class="left">Hyrum Bradshaw</div>
+      <div class="right"><a href="https://github.com/hyrumbradshaw/blockchain">GitHub</a></div>
+    </footer>
+  </body>
+</html>
