@@ -1,12 +1,79 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+/* * {
+  border: 1px solid blue;
+} */
+
 body {
   margin: 0 auto;
   max-width: 50em;
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 4em 1em;
+  color: #555;
+  padding-bottom: 4em;
+  display: block;
 }
 
-h2 {
+h3 {
   margin-top: 1em;
   padding-top: 1em;
+}
+
+h1, h2, h3, strong {
+  color: #333;
+}
+
+a {
+  color: #e81c4f;
+}
+
+header {
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  position: fixed;
+  bottom: 0;
+  width: 50em;
+  max-width: 100%;
+  box-sizing: border-box;
+  max-width: 80em;
+  margin: 0 auto;
+}
+
+.left, .right {
+  flex: 1;
+  overflow: hidden;
+  white-space:nowrap;
+  min-width: 0;
+}
+
+.right {
+  text-align: right;
+}
+
+menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.blockchain {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.block {
+  background-color: lightgrey;
+  padding: 1em;
+  border-radius: 10px;
 }
