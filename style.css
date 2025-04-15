@@ -81,3 +81,8 @@ menu {
   max-width: 40em;
   width: 40em;
 }
+
+.loading {
+  font-style: italic;
+  margin: 1rem 0;
+}
