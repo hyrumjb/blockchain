@@ -86,3 +86,7 @@ menu {
   font-style: italic;
   margin: 1rem 0;
 }
+
+.user_content {
+  justify-content: center;
+}
